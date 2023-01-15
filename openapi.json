@@ -1,0 +1,314 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Seguros API - OpenAPI 3.0",
+    "description": "Esta es la documentaciòu de na simple API que cuenta con clientes y polizas, cumple con seguridad Bearer y permisos de roles. \nLos endpoints no son funcionales. Recomendamos usar nuestra collection de Postman.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://seq.faustooliva.repl.co"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Authorization",
+      "description": "Este endpoint maneja la creación del token de seguridad"
+    },
+    {
+      "name": "Clients",
+      "description": "Este endpoint maneja toda la información de la clientela."
+    },
+    {
+      "name": "Policies",
+      "description": "Este endpoint maneja toda la informacion de las polizas"
+    }
+  ],
+  "paths": {
+    "/auth/login": {
+      "get": {
+        "tags": [
+          "Authorization"
+        ],
+        "summary": "Creación de token a partir de las credenciales del cliente",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AuthE"
+          },
+          {
+            "$ref": "#/components/parameters/AuthP"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "(Ok) Se ha creado el token exitosamente. Utilizelo en sus servicios.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "token"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundClient"
+          }
+        }
+      }
+    },
+    "/client/getById": {
+      "get": {
+        "tags": [
+          "Clients"
+        ],
+        "summary": "Buscar cliente por id. Apto para users y admins",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ClientId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "(Ok) La información del cliente solicitado se ha recolectado",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Client"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/RoleUnauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundClient"
+          }
+        }
+      }
+    },
+    "/client/getByName": {
+      "get": {
+        "tags": [
+          "Clients"
+        ],
+        "summary": "Buscar cliente por nombre. Apto para users y admins",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ClientName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "(Ok) La información del cliente solicitado se ha recolectado",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Client"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/RoleUnauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundClient"
+          }
+        }
+      }
+    },
+    "/policy/getByClientName": {
+      "get": {
+        "tags": [
+          "Policies"
+        ],
+        "summary": "Buscar poliza por nombre relacionado del cliente. Apto solamente para admins",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/NamePolicie"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "(Ok) La información de la poliza solicitada se ha recolectado",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Policie"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/RoleUnauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundPolicie"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "Unauthorized": {
+        "description": "(Unauthorized) Usted no esta autorizada para utilizar este servicio,"
+      },
+      "RoleUnauthorized": {
+        "description": "(Role Unauthorized) Su rol no está autorizado para recoger esta información"
+      },
+      "NotFoundClient": {
+        "description": "(Not Found) El cliente no fue encontrado"
+      },
+      "NotFoundPolicie": {
+        "description": "(Not Found) La poliza no fue encontrada"
+      }
+    },
+    "schemas": {
+      "Client": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "a0ece5db-cd14-4f21-812f-916634e7be86"
+          },
+          "name": {
+            "type": "string",
+            "example": "Guadalupe"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "guadablanken@quotezart.com"
+          },
+          "role": {
+            "type": "string",
+            "example": "user admin"
+          },
+          "password": {
+            "type": "integer",
+            "format": "int32",
+            "example": 3
+          }
+        }
+      },
+      "Policie": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "64cceef9-3a01-49ae-a23b-3761b604854k"
+          },
+          "amountInsured": {
+            "type": "number",
+            "format": "double",
+            "example": 1825.89
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "geelanken@quotezart.com"
+          },
+          "inceptionDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2016-06-01T03:33:32.000Z"
+          },
+          "installmentPayment": {
+            "type": "boolean",
+            "example": true
+          },
+          "clientId": {
+            "type": "string",
+            "example": "a0ece5db-cd14-4f21-812f-916634e7be86"
+          }
+        }
+      }
+    },
+    "parameters": {
+      "AuthE": {
+        "in": "query",
+        "name": "email",
+        "description": "email del cliente",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      },
+      "AuthP": {
+        "in": "query",
+        "name": "password",
+        "description": "password del cliente",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      },
+      "ClientId": {
+        "in": "query",
+        "name": "clientId",
+        "description": "id del cliente a buscar",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      },
+      "ClientName": {
+        "in": "query",
+        "name": "clientName",
+        "description": "nombre del cliente a buscar",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      },
+      "NamePolicie": {
+        "in": "query",
+        "name": "NamePolicie",
+        "description": "nombre del cliente relacionada con la poliza",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ]
+}

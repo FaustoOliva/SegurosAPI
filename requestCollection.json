@@ -1,0 +1,153 @@
+{
+	"info": {
+		"_postman_id": "c03ce709-21f9-46a2-b982-baaf477a828b",
+		"name": "Api_Seguros",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/auth/login?email&password",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": null
+						},
+						{
+							"key": "password",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Client by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/client/getById?id",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"client",
+						"getById"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Client by name",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/client/getByName?name",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"client",
+						"getByName"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Policie by client name",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/policy/getByClientName?name",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"policy",
+						"getByClientName"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "{{URL}}",
+			"value": "}"
+		},
+		{
+			"key": "https://seq.faustooliva.repl.co",
+			"value": "{{URL}}"
+		},
+		{
+			"key": "{{url}}",
+			"value": "{{https://seq.faustooliva.repl.co}}"
+		}
+	]
+}
