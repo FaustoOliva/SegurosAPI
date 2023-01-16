@@ -16,8 +16,7 @@ app.use(cors());
 app.use(express.json());
 passport.use(jwtStrategy)
 app.use(passport.initialize())
-
-//app.use("/auth", OuthRouter);                                                                           
+                                                                           
 app.use("/client", ClientRouter);
 app.use("/policy", PolicieRouter);
 app.use("/auth", AuthRouter);

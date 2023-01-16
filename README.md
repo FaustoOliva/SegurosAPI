@@ -2,6 +2,12 @@
 
 Hecho por Fausto Oliva 
 
+## Requirements
+
+- Postman
+- Node version superior al 17.5.0
+
+
 ## Setup
 
 -   Clonar el repositorio
@@ -14,7 +20,7 @@ En `https://localhost:8080/apidocs` hay una documentacion de openapi no funciona
 
 ## Postman
 
-En Postman presionar `Ctrl + o` para importar el archivo de 'req collection'. Para utilizar la api primero tiene que loguearse como cliente y se lo va a otorgar un token. Ese token lo tiene que pegar en *Authorization* -> *Bearer token* y pegarlo. 
+En Postman presionar `Ctrl + o` para importar el archivo de *requestCollection.json*. Para utilizar la api primero tiene que loguearse como cliente y se lo va a otorgar un token. Ese token lo tiene que pegar en *Authorization* -> *Bearer token* y pegarlo. 
 
 ## Endpoints
 

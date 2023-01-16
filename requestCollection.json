@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "c03ce709-21f9-46a2-b982-baaf477a828b",
+		"_postman_id": "85a69963-4ed9-411d-b680-10136d422593",
 		"name": "Api_Seguros",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20034226"
 	},
 	"item": [
 		{
@@ -11,7 +12,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/auth/login?email&password",
+					"raw": "{{url}}/auth/login?email=&password=",
 					"host": [
 						"{{url}}"
 					],
@@ -22,11 +23,11 @@
 					"query": [
 						{
 							"key": "email",
-							"value": null
+							"value": ""
 						},
 						{
 							"key": "password",
-							"value": null
+							"value": ""
 						}
 					]
 				}
@@ -49,7 +50,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/client/getById?id",
+					"raw": "{{url}}/client/getById?id=",
 					"host": [
 						"{{url}}"
 					],
@@ -60,7 +61,7 @@
 					"query": [
 						{
 							"key": "id",
-							"value": null
+							"value": ""
 						}
 					]
 				}
@@ -83,7 +84,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/client/getByName?name",
+					"raw": "{{url}}/client/getByName?name=",
 					"host": [
 						"{{url}}"
 					],
@@ -94,7 +95,7 @@
 					"query": [
 						{
 							"key": "name",
-							"value": null
+							"value": ""
 						}
 					]
 				}
@@ -117,7 +118,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/policy/getByClientName?name",
+					"raw": "{{url}}/policy/getByClientName?name=",
 					"host": [
 						"{{url}}"
 					],
@@ -128,7 +129,7 @@
 					"query": [
 						{
 							"key": "name",
-							"value": null
+							"value": ""
 						}
 					]
 				}
@@ -136,18 +137,31 @@
 			"response": []
 		}
 	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
 	"variable": [
 		{
-			"key": "{{URL}}",
-			"value": "}"
-		},
-		{
-			"key": "https://seq.faustooliva.repl.co",
-			"value": "{{URL}}"
-		},
-		{
-			"key": "{{url}}",
-			"value": "{{https://seq.faustooliva.repl.co}}"
+			"key": "url",
+			"value": "http://localhost:8080",
+			"type": "string"
 		}
 	]
 }

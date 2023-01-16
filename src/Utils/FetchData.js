@@ -44,7 +44,7 @@ export const getPolicies = async (nameC) => {
     const response = await axios.get(
       "http://www.mocky.io/v2/580891a4100000e8242b75c5"
     );
-    var pS = response.data.policies.find(p => p.clientId == client.id)
+    var pS = response.data.policies.filter(p => p.clientId == client.id)
     return pS;
   } catch (error) {
     console.log(error);

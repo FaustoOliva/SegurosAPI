@@ -6,13 +6,13 @@ import config from "../../config.js"
 export class AuthService {
          getSignedToken = async (emailS, passwordS) => {
           const client = await getClientByGaP(emailS, passwordS) 
-          if(!client) return false
-           const token = "Token:" + jwt.sign(
+          if(!client) return client
+          const token = "Token:" + jwt.sign(
                 {
                     payload: "custom payload",
-                    id: client.id,
-                    userEmail: client.email,
-                    role: client.role,
+                    id: client?.id,
+                    userEmail: client?.email,
+                    role: client?.role,
                 },
                 config.secretWord,
                 {
